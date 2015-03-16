@@ -1,55 +1,52 @@
 
-$("#main").append(internationalizeButton);
+$("#header").prepend(internationalizeButton);
 
-function inName(name) {
-    var names = name.trim().split(" ");
+function inName() {
+    var names = bio.name.trim().split(" ");
 
     return  names[0].capitalize() + " " + names[names.length - 1].toUpperCase();
 }
 
 String.prototype.capitalize = function() {
-
     var string = this.toLowerCase();
     string = string.slice(0, 1).toUpperCase() + string.slice(1);
 
     return string;
 };
 
-var work = {
-	"jobs": [
-		{
-			"employer": "Panucci's Pizza",
-			"title": "Delivery boy",
-			"location": "New York",
-			"dates": "1996 - 1999",
-			"description": "Donec sed odio dui. Maecenas faucibus mollis interdum. Nulla vitae elit libero, a pharetra augue. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."
-		},
-        {
-            "employer": "Planet Express",
-            "title": "Delivery boy",
-            "location": "New New York",
-            "dates": "3000",
-            "description": "Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet."
-        },
-	]
-};
+/*
+ * Change location in bio object and DOM (class: locationData)
+ *
+ * @param {String} name (location name)
+ *
+ */
+function changeLocation (name) {
+    bio.contacts.location = name;
+    $(".locationData").text(name);
 
-var projects = {
-	"projects": [
-		{
-			"title": "Planet Express website",
-			"dates": "3000",
-			"description": "Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
-			"images": ["http://lorempixel.com/400/299/", "http://lorempixel.com/401/299/"]
-		},
-        {
-            "title": "Planet Express website",
-            "dates": "3000",
-            "description": "Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
-            "images": ["http://lorempixel.com/400/300/", "http://lorempixel.com/401/300/"]
+    alert("Location setted: " + bio.contacts.location);
+}
+
+$(function(){
+    var navTop = $("nav").offset().top;
+
+    $(document).on("scroll", function(){
+        var scrollTop = $(this).scrollTop();
+
+        if ( scrollTop >= navTop ) {
+            $("nav").addClass("fixed");
+        } else {
+            $("nav").removeClass("fixed");
         }
-	]
-};
+    });
+
+    $("nav a").on("click", function(e){
+        e.preventDefault();
+        var value = $($(this).attr("data-goto")).offset().top - $("nav").height();
+        $(window).trigger( 'preventInfiniteScroll' );
+        $("html, body").animate( { scrollTop: value }, 'slow');
+    });
+})
 
 var bio = {
 	"name": "Enrico Boccadifuoco",
@@ -64,6 +61,63 @@ var bio = {
 		"location": "Palermo"
 	},
 	"skills": ["skill1", "skill2", "skill3", "skill4"]
+};
+
+var work = {
+    "jobs": [
+        {
+            "employer": "Panucci's Pizza",
+            "title": "Delivery boy",
+            "location": "New York",
+            "dates": "1996 - 1999",
+            "description": "Donec sed odio dui. Maecenas faucibus mollis interdum. Nulla vitae elit libero, a pharetra augue. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."
+        },
+        {
+            "employer": "Planet Express",
+            "title": "Delivery boy",
+            "location": "New New York",
+            "dates": "3000",
+            "description": "Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet."
+        },
+    ]
+};
+
+var projects = {
+    "projects": [
+        {
+            "title": "Planet Express website",
+            "dates": "3000",
+            "description": "Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
+            "images": ["http://lorempixel.com/400/299/", "http://lorempixel.com/401/299/"]
+        },
+        {
+            "title": "Planet Express website",
+            "dates": "3000",
+            "description": "Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
+            "images": ["http://lorempixel.com/400/300/", "http://lorempixel.com/401/300/"]
+        }
+    ]
+};
+
+var education = {
+    "schools": [
+        {
+            "name": "Univerity of Pisa",
+            "location": "Pisa, IT",
+            "degree": "Electronic Engineering",
+            "majors": ["CS"],
+            "dates": "2011-2013",
+            "url": "unipi.it"
+        }
+    ],
+    "onlineCourses": [
+        {
+            "title": "CS50",
+            "school": "HarvardX",
+            "dates": "2014",
+            "url": "https://www.edx.org/course/introduction-computer-science-harvardx-cs50x"
+        }
+    ]
 };
 
 bio.display = function() {
@@ -130,27 +184,6 @@ projects.display = function() {
         }
 
     }
-};
-
-var education = {
-    "schools": [
-        {
-            "name": "Univerity of Pisa",
-            "location": "Pisa, IT",
-            "degree": "Electronic Engineering",
-            "majors": ["CS"],
-            "dates": "2011-2013",
-            "url": "unipi.it"
-        }
-    ],
-    "onlineCourses": [
-        {
-            "title": "CS50",
-            "school": "HarvardX",
-            "dates": "2014",
-            "url": "https://www.edx.org/course/introduction-computer-science-harvardx-cs50x"
-        }
-    ]
 };
 
 education.display = function() {

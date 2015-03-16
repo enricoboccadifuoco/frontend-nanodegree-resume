@@ -223,3 +223,42 @@ span {
     display: block;
   }
 }
+
+/* custom css */
+
+#menu {
+    height: 60px;
+    position: relative;
+}
+
+nav {
+    background-color: #484848;
+    position: absolute;
+    width: 100%;
+}
+
+nav.fixed {
+    position: fixed;
+    top: 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    padding: 20px;
+}
+
+nav a:visited,
+nav a {
+    margin: 0;
+    color: #FFFFFF;
+    text-decoration: underline;
+    line-height: 20px;
+}
+
+nav a:hover {
+    color: #F5AE23;
+}
