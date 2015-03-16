@@ -1,0 +1,5 @@
+developer.mozilla.org
+caniuse.com
+lorempixel.com
+
+"Homemade" scripts :)

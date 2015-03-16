@@ -1,12 +1,22 @@
 
-$("#header").prepend(internationalizeButton);
 
+/*
+ * Internationalize name
+ *
+ */
 function inName() {
     var names = bio.name.trim().split(" ");
 
-    return  names[0].capitalize() + " " + names[names.length - 1].toUpperCase();
+    var internationalName = names[0].capitalize() + " " + names[names.length - 1].toUpperCase();
+    bio.name = internationalName;
+
+    return bio.name;
 }
 
+/*
+ * Capitalize string
+ *
+ */
 String.prototype.capitalize = function() {
     var string = this.toLowerCase();
     string = string.slice(0, 1).toUpperCase() + string.slice(1);
@@ -27,6 +37,17 @@ function changeLocation (name) {
     alert("Location setted: " + bio.contacts.location);
 }
 
+/*
+ * Scroll to target
+ *
+ * @param {Number} value (scrollTop target)
+ *
+ */
+function goto (value) {
+    $(window).trigger( 'preventInfiniteScroll' );
+    $("html, body").animate( { scrollTop: value }, 'slow');
+}
+
 $(function(){
     var navTop = $("nav").offset().top;
 
@@ -42,9 +63,9 @@ $(function(){
 
     $("nav a").on("click", function(e){
         e.preventDefault();
-        var value = $($(this).attr("data-goto")).offset().top - $("nav").height();
-        $(window).trigger( 'preventInfiniteScroll' );
-        $("html, body").animate( { scrollTop: value }, 'slow');
+        var scrollTop = $($(this).attr("data-goto")).offset().top - $("nav").height();
+
+        goto(scrollTop);
     });
 })
 
@@ -55,7 +76,7 @@ var bio = {
     "biopic": "images/fry.jpg",
 	"contacts": {
 		"mobile": "650-000-555",
-		"email": "boccadifuoco@gmail.comm",
+		"email": "boccadifuoco@gmail.com",
 		"github": "enricoboccadifuoco",
 		"twitter": "@EBoccadifuoco",
 		"location": "Palermo"
@@ -124,6 +145,8 @@ bio.display = function() {
 
     var formattedName = HTMLheaderName.replace("%data%", this.name);
     var formattedRole = HTMLheaderRole.replace("%data%", this.role);
+
+    $("#header").prepend(internationalizeButton);
 
     $("#header").prepend(formattedRole);
     $("#header").prepend(formattedName);

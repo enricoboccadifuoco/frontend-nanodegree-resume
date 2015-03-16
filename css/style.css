@@ -257,8 +257,35 @@ nav a {
     color: #FFFFFF;
     text-decoration: underline;
     line-height: 20px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 nav a:hover {
     color: #F5AE23;
+}
+
+.btn-internationalize {
+    background-color: #FFF;
+    color: #F5A623;
+    font-size: 18px;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-internationalize:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+
+    -webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+}
+
+.btn-internationalize:active {
+    color: #484848;
 }
