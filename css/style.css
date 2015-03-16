@@ -91,6 +91,16 @@ a {
   display: none;
 }
 
+#skills .flex-item {
+    margin-bottom: 5px;
+}
+
+ul#skills {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding-left: 0;
+}
+
 .orange {
   background-color: #F5AE23;
 }
